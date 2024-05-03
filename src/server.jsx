@@ -83,7 +83,7 @@ createServer({
 
   routes() {
     this.namespace = 'api';
-    // this.passthrough('https://firestore.googleapis.com/**');
+    this.passthrough('https://firestore.googleapis.com/**');
     this.logging = false;
     this.timing = 1000;
 

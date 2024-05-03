@@ -21,7 +21,6 @@ export async function action({ request }) {
   try {
     const data = await loginUser({ email, password });
     localStorage.setItem('loggedin', true);
-    // const response = redirect('/host');
     const response = redirect(pathname);
     return Object.defineProperty(response, 'body', { value: true });
   } catch (err) {

@@ -6,16 +6,14 @@ import {
   defer,
   Await,
 } from 'react-router-dom';
-import { getVans } from '../../api';
+import { getVan } from '../../api';
 
 export function loader({ params }) {
-  // return getVans(params.id);
-  return defer({ vans: getVans(params.id) });
+  return defer({ vans: getVan(params.id) });
 }
 
 export default function VanDetail() {
   const location = useLocation();
-  // const van = useLoaderData();
   const dataPromise = useLoaderData();
 
   const search = location.state?.search || '';
@@ -42,19 +40,7 @@ export default function VanDetail() {
       </Link>
 
       <Suspense fallback={<h2>Loading van detail...</h2>}>
-        <Await resolve={dataPromise.vans}>
-          {renderVanDetail}
-          {/* <div className='van-detail'>
-            <img src={van.imageUrl} />
-            <i className={`van-type ${van.type} selected`}>{van.type}</i>
-            <h2>{van.name}</h2>
-            <p className='van-price'>
-              <span>${van.price}</span>/day
-            </p>
-            <p>{van.description}</p>
-            <button className='link-button'>Rent this van</button>
-          </div> */}
-        </Await>
+        <Await resolve={dataPromise.vans}>{renderVanDetail}</Await>
       </Suspense>
     </div>
   );
